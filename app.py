@@ -1,13 +1,20 @@
 from flask import Flask
 from config import Config
 from models import db
+from routes.tracking import tracking_bp
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    # Connect the database
     db.init_app(app)
 
+    # Register blueprints (route groups)
+    app.register_blueprint(tracking_bp)
+
+    # Create tables
     with app.app_context():
         db.create_all()
 
