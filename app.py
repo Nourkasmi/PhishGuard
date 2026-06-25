@@ -6,10 +6,8 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Connect the database to the app
     db.init_app(app)
 
-    # Create all tables inside the app context
     with app.app_context():
         db.create_all()
 
